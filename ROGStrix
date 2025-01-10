@@ -1,0 +1,130 @@
+conky.config = {
+background = false,
+
+-- Conky settings --
+update_interval = 1,
+cpu_avg_samples = 2,
+net_avg_samples = 2,
+double_buffer = true,
+no_buffers = true,
+imlib_cache_size = 0,
+format_human_readable = true,
+
+--Text settings --
+use_xft = true,
+font = 'ROG LyonsType:size=8',
+text_buffer_size = 2048,
+pad_percents = 0,
+
+--Window specifications --
+own_window = true,
+own_window_class = 'Conky',
+own_window_type = 'normal',
+own_window_transparent = false,
+own_window_argb_visual = true,
+own_window_argb_value = 0,
+own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+alignment = 'bl',
+gap_x = 3,
+gap_y = 0,
+minimum_height = 450,
+minimum_width = 225,
+maximum_width = 225,
+
+-- Graphics ngs --
+draw_shades = false,
+draw_outline = false,
+draw_borders = false,
+draw_graph_borders = true,
+border_width = 0,
+default_color = '#FFFFFF',
+
+-- Display Option --
+-- Change this option from 0 to 1, 2 or vice versa to set on which monitor --
+xinerama_head = 1,
+
+-- change colors as needed --
+color1 = '#FF2692',       -- hr 2 line color, pink
+color2 = 'magenta2',	  -- 
+color3 = 'deepskyblue2',  -- 
+color4 = '#FFA500',       -- header names, orange
+color5 = 'gray17',        -- 
+color6 = 'yellow1',       -- 
+color7 = 'green3',        -- 
+color8 = 'red3',          -- 
+color9 = '#FF2692',	  -- another pink for text
+}
+
+conky.text = [[
+${image ~/conky/ROGStrix/ROG_logo1.png -p 15,525 -s 205x100}
+# -- Date & Time -- #
+#${goto 0}${voffset 0}${color8}${font ROG LyonsType:bold:size=20}R ${font ROG LyonsType:bold:size=10}${color4}D${font ROG LyonsType:size=8}ate${font ROG LyonsType:bold:size=10}/T${font}ime${font}${color1}${hr 2}${color9}
+${goto 0}${voffset 0}${color8}${font ROG LyonsType:bold:size=20}R ${font ROG LyonsType:bold:size=10}${voffset 0}${color4}${font ROG LyonsType:bold:size=10}D${font ROG LyonsType:bold:size=8}ATE${font ROG LyonsType:bold:size=10} & T${font ROG LyonsType:bold:size=8}IME ${color1}${hr 2}${color9}
+${font ROG LyonsType:size=11}${color9}${time %A} 
+${alignc}${color9}${time %Y} ${color4}${time %B} ${color3}${time %d}
+${goto 110}${font ROG LyonsType:size=16}${color9}${time %H}${color6}:${color4}${time %M}${color6}:${color3}${time %S}
+# ---   --- #
+# --- System Info --- #
+# ---   --- #
+${goto 0}${voffset -10}${color2}${font  ROG LyonsType:bold:size=20}O ${font ROG LyonsType:bold:size=10}${color4}S${font ROG LyonsType:bold:size=8}YSTEM ${font}${color1}${hr 2}${color9}
+#${goto 2}${color9}USBs${color4}${alignc}@${alignr}${color3}${execpi 3500 lsusb | grep -iv 'hub' | wc -l}
+${goto 2}${color9}${font}OS${color4}${alignc}@${alignr}${color3}${sysname}
+${goto 2}${color9}${font}Arch${color4}${alignc}@${alignr}${color3}${machine}
+${goto 2}${color9}Desktop${color4}${alignc}@${alignr}${color3}${execi 65000 neofetch --stdout | grep "DE:" | awk '{print $2" "$3'}}
+${goto 2}${color9}${font}Distro${color4}${alignc}@${alignr}${color3}${execi 65000 lsb_release -d | awk '{print $2'}} ${execi 65000 lsb_release -c | awk '{print $2'}}
+${goto 2}${color9}Kernel${color4}${alignc}@${alignr}${color3}${kernel}
+# ---   --- #
+# --- TEMPS & RPMS--- #
+# ---   --- #
+${goto 0}${voffset 0}${color8}${font ROG LyonsType:bold:size=20}G ${font ROG LyonsType:bold:size=10}${voffset 0}${color4}${font ROG LyonsType:bold:size=10}T${font ROG LyonsType:bold:size=8}EMPS${font ROG LyonsType:bold:size=10} & F${font ROG LyonsType:bold:size=8}ANS ${color1}${hr 2}${color9}
+${goto 2}${voffset 0}${font}${color9}CPU ${color4}@ ${color3}${execpi 5 sensors nct6798-isa-0290 | grep -i cputin | awk -F "°C" '{print$1}' | awk -F "+" '{print$2}' | awk -F "." '{print$1}'}${color6}°C${goto 115}${color9}MB ${color4}@ ${color3}${execpi 5 sensors nct6798-isa-0290 | grep -i systin | awk -F "°C" '{print$1}' | awk -F "+" '{print$2}' | awk -F "." '{print$1}'}${color6}°C
+${goto 2}${voffset 0}${font}${color9}SSD0 ${color4}@ ${color3}${execpi 5 sensors nvme-pci-0100 | grep -i composite | awk -F "°C" '{print$1}' | awk -F "+" '{print$2}' | awk -F "." '{print$1}'}${color6}°C${goto 115}${voffset 0}${font}${color9}SSD1 ${color4}@ ${color3}${execpi 5 sensors nvme-pci-0500 | grep -i composite | awk -F "°C" '{print$1}' | awk -F "+" '{print$2}' | awk -F "." '{print$1}'}${color6}°C
+${goto 2}${voffset 0}${font}${color9}F1 ${color4}@ ${color3}${execpi 5 sensors nct6798-isa-0290 | grep -i fan1 | awk -F" RPM" '{print$1}' | awk -F ":" '{print$2}' | tr -d [:blank:]} ${color6}rpm ${goto 115}${voffset 0}${font}${color9}F2 ${color4}@ ${color3}${execpi 5 sensors nct6798-isa-0290 | grep -i fan2 | awk -F" RPM" '{print$1}' | awk -F ":" '{print$2}' | tr -d [:blank:]} ${color6}rpm 
+${goto 2}${voffset 0}${font}${color9}F3 ${color4}@ ${color3}${execpi 5 sensors nct6798-isa-0290 | grep -i fan3 | awk -F" RPM" '{print$1}' | awk -F ":" '{print$2}' | tr -d [:blank:]} ${color6}rpm ${goto 115}${voffset 0}${font}${color9}F4 ${color4}@ ${color3}${execpi 5 sensors nct6798-isa-0290 | grep -i fan4 | awk -F" RPM" '{print$1}' | awk -F ":" '{print$2}' | tr -d [:blank:]} ${color6}rpm 
+${goto 2}${voffset 0}${font}${color9}F5 ${color4}@ ${color3}${execpi 5 sensors nct6798-isa-0290 | grep -i fan5 | awk -F" RPM" '{print$1}' | awk -F ":" '{print$2}' | tr -d [:blank:]} ${color6}rpm ${goto 115}${voffset 0}${font}${color9}F6 ${color4}@ ${color3}${execpi 5 sensors nct6798-isa-0290 | grep -i fan6 | awk -F" RPM" '{print$1}' | awk -F ":" '{print$2}' | tr -d [:blank:]} ${color6}rpm 
+${goto 2}${voffset 0}${font}${color9}F7 ${color4}@ ${color3}${execpi 5 sensors nct6798-isa-0290 | grep -i fan7 | awk -F" RPM" '{print$1}' | awk -F ":" '{print$2}' | tr -d [:blank:]} ${color6}rpm
+# ---   --- #
+# --- MEMORY ---#
+# ---   --- #
+${goto 0}${voffset 0}${color2}${font ROG LyonsType:bold:size=20}S ${font ROG LyonsType:bold:size=9}${voffset 0}${color4}M${font}EMORY ${color1}${hr 2}${color9}
+${goto 2}${voffset 0}${color9}${font}RAM ${color4}@ ${color3}${memperc}${color6}%${goto 115}${color9}${mem}${color4}/${color6}${memmax}
+${goto 2}${voffset 0}${color9}${font}SWAP ${color4}@ ${color3}${swapperc}${color6}%${goto 115}${color9}${swap}${color4}/${color6}${swapmax}
+# ---   --- #
+# --- SSD --- #
+# ---   --- #
+${goto 0}${voffset 0}${color2}${font ROG LyonsType:bold:size=20}T ${font ROG LyonsType:bold:size=9}${color4}${voffset 0}SSD ${color1}${hr 2}${color9}
+${goto 2}${color9}${font}SSD0 ${color4}@ ${color3}${fs_used_perc /}${color6}%${goto 115}${color9}${fs_used /}${color4}/${color6}${fs_size /}
+${goto 2}${color9}${font}SSD1 ${color4}@ ${color3}${fs_used_perc /games}${color6}%${goto 115}${color9}${fs_used /games}${color4}/${color6}${fs_size /games}
+# ---   --- #
+# --- CPU --- #
+# ---   --- #
+${goto 0}${voffset 0}${color2}${font ROG LyonsType:bold:size=20}R ${font ROG LyonsType:bold:size=9}${voffset 0}${color4}CPU ${color1}${hr 2}
+${goto 15}${color9}${font}${execpi 65000 cat /proc/cpuinfo | grep 'model name'| head -n 1 | awk -F ": " '{print$2}' | awk -F " " '{print$1,$2,$3,$4}'}${color4} @ ${color3}${freq_g}${color6}GHz
+${goto 2}${color9}C01: ${goto 40}${color4}${cpubar cpu1 7,65}${goto 115}${color9}C02: ${goto 150}${color3}${cpubar cpu2 7,65}
+${goto 2}${color9}C03: ${goto 40}${color4}${cpubar cpu3 7,65}${goto 115}${color9}C04: ${goto 150}${color3}${cpubar cpu4 7,65}
+${goto 2}${color9}C05: ${goto 40}${color4}${cpubar cpu5 7,65}${goto 115}${color9}C06: ${goto 150}${color3}${cpubar cpu6 7,65}
+${goto 2}${color9}C07: ${goto 40}${color4}${cpubar cpu7 7,65}${goto 115}${color9}C08: ${goto 150}${color3}${cpubar cpu8 7,65}
+${goto 2}${color9}C09: ${goto 40}${color4}${cpubar cpu9 7,65}${goto 115}${color9}C10: ${goto 150}${color3}${cpubar cpu10 7,65}
+${goto 2}${color9}C11: ${goto 40}${color4}${cpubar cpu11 7,65}${goto 115}${color9}C12: ${goto 150}${color3}${cpubar cpu12 7,65}
+${goto 2}${color9}C13: ${goto 40}${color4}${cpubar cpu13 7,65}${goto 115}${color9}C14: ${goto 150}${color3}${cpubar cpu14 7,65}
+${goto 2}${color9}C15: ${goto 40}${color4}${cpubar cpu15 7,65}${goto 115}${color9}C16: ${goto 150}${color3}${cpubar cpu16 7,65}
+# ---   --- #
+# --- GPU AMD --- #
+# ---   --- #
+${goto 5}${voffset 5}${color8}${font ROG LyonsType:bold:size=20}I ${font ROG LyonsType:bold:size=9}${voffset -8}${color4}GPU ${color1}${hr 2}
+${color9}${font}${alignc}${execi 65000 glxinfo | grep 'OpenGL renderer string:' | awk '{print $4" "$5" "$6" "$7" "$8}'} ${color4}@ ${color3}${execi 2 sensors amdgpu-pci-0a00| awk '/edge/{ printf "%2.f\n" , $2 ; exit}'}${color6}°C
+${goto 2}${color9}Mem ${color4}@ ${color3}${execi 5 numfmt --to=iec < /sys/class/drm/card1/device/mem_info_vram_used}${goto 115}${color9}Total ${color4}@ ${color3}${execi 5 numfmt --to=iec < /sys/class/drm/card1/device/mem_info_vram_total}
+${goto 2}${color9}Sclk ${color4}@ ${color3}${execi 1 grep -Po '\d+:\s\K(\d+)(?=.*\*$)' /sys/class/drm/card1/device/pp_dpm_sclk | awk '{ printf "%2.00f\n" , $1 ; exit}'}${color6}Mhz ${goto 115}${color9}Mclk${color4}@ ${color3}${execi 1 grep -Po '\d+:\s\K(\d+)(?=.*\*$)' /sys/class/drm/card1/device/pp_dpm_mclk | awk '{ printf "%2.00f\n" , $1 ; exit}'}${color6}Mhz
+${goto 2}${color9}Fan ${color4}@ ${color3}${execi 2 sensors amdgpu-pci-0a00 | grep "fan1:" | awk '{print $2}'} ${color6}rpm ${goto 115}${color9}Speed ${color4}@ ${color3}${execi 1 sensors amdgpu-pci-0a00 | grep fan1 | awk '{print $2 / 3300 * 100}' | awk '{ printf "%2.f\n" , $1 ; exit}'} ${color6}%
+${goto 2}${color9}Power ${color4}@ ${color3}${execi 5 sensors amdgpu-pci-0a00 | awk '/PPT/{ printf "%2.f\n" , $2 ; exit}'} ${color6}W ${goto 115}${color9}Total ${color4}@ ${color3}${execi 5 sensors amdgpu-pci-0a00 | awk '/PPT/{ printf "%2.f\n" , $6 ; exit}'} ${color6}W
+${alignc}${voffset -2}${color9}Graphic Pipe ${color4}@ ${color3}${execi 5 numfmt --to=iec < /sys/class/drm/card1/device/gpu_busy_percent}${color6}%
+${goto 2}${voffset -2}${color6}${execigraph 1 "numfmt --to=iec < /sys/class/drm/card1/device/gpu_busy_percent" 15,225 fc8c3b c6396b -t}
+# ---   --- #
+# --- NETWORK --- #
+# ---   --- #
+${if_existing /sys/class/net/enp7s0/operstate up}${goto 2}${voffset -5}${color2}${font ROG LyonsType:bold:size=20}X ${font ROG LyonsType:size=9}${voffset -4}${color4}NETWORK ${color1}${hr 2}
+${goto 2}${color9}${font}Cur${voffset -2}${font OxygenSans:bold:size=8}${color6}↓${font}${color4}@${color3}${downspeed enp7s0}${color6}/s ${goto 115}${color9}${font}Tot${voffset -2}${font OxygenSans:bold:size=8}${color6}↓${font}${color4}@${color3}${totaldown enp7s0}
+${goto 2}${color9}${font}Cur${voffset -2}${font OxygenSans:bold:size=8}${color6}↑${font}${color4}@${color3}${upspeed enp7s0}${color6}/s ${goto 115}${color9}${font}Tot${voffset -2}${font OxygenSans:bold:size=8}${color6}↑${font}${color4}@${color3}${totalup enp7s0} ${else}${endif}
+${goto 2}${color4}${upspeedgraph enp7s0 20,100 008000 FF0000 -t}${goto 115}${color3}${downspeedgraph enp7s0 20,100 008000 FF0000 -t}
+${alignc}${voffset 0}${color9}Local IP ${color4}@ ${color3}${addrs enp7s0}
+]]
