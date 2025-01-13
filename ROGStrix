@@ -41,7 +41,7 @@ default_color = '#FFFFFF',
 
 -- Display Option --
 -- Change this option from 0 to 1, 2 or vice versa to set on which monitor --
-xinerama_head = 1,
+xinerama_head = 2,
 
 -- change colors as needed --
 color1 = '#FF2692',       -- hr 2 line color, pink
@@ -70,9 +70,9 @@ ${goto 0}${voffset -10}${color2}${font  ROG LyonsType:bold:size=20}O ${font ROG 
 #${goto 2}${color9}USBs${color4}${alignc}@${alignr}${color3}${execpi 3500 lsusb | grep -iv 'hub' | wc -l}
 ${goto 2}${color9}${font}OS${color4}${alignc}@${alignr}${color3}${sysname}
 ${goto 2}${color9}${font}Arch${color4}${alignc}@${alignr}${color3}${machine}
-${goto 2}${color9}Desktop${color4}${alignc}@${alignr}${color3}${execi 65000 neofetch --stdout | grep "DE:" | awk '{print $2" "$3'}}
-${goto 2}${color9}${font}Distro${color4}${alignc}@${alignr}${color3}${execi 65000 lsb_release -d | awk '{print $2'}} ${execi 65000 lsb_release -c | awk '{print $2'}}
-${goto 2}${color9}Kernel${color4}${alignc}@${alignr}${color3}${kernel}
+${goto 2}${color9}Desktop${color4}${alignc}@${alignr}${color3}${execpi 65000 neofetch --stdout | grep "DE:" | awk '{print $2" "$3'}}
+${goto 2}${color9}${font}Distro${color4}${alignc}@${alignr}${color3}${execi 65000 lsb_release -d | awk '{print $2'}} ${execpi 65000 lsb_release -c | awk '{print $2'}}
+${goto 2}${color9}Kernel ${color4}${alignc}@${alignr}${color3}${kernel}
 # ---   --- #
 # --- TEMPS & RPMS--- #
 # ---   --- #
