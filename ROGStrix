@@ -62,7 +62,7 @@ ${image ~/conky/ROGStrix/ROG_logo1.png -p 15,525 -s 205x100}
 ${goto 0}${voffset 0}${color8}${font ROG LyonsType:bold:size=20}R ${font ROG LyonsType:bold:size=10}${voffset 0}${color4}${font ROG LyonsType:bold:size=10}D${font ROG LyonsType:bold:size=8}ATE${font ROG LyonsType:bold:size=10} & T${font ROG LyonsType:bold:size=8}IME ${color1}${hr 2}${color9}
 ${font ROG LyonsType:size=11}${color9}${time %A} 
 ${alignc}${color9}${time %Y} ${color4}${time %B} ${color3}${time %d}
-${goto 110}${font ROG LyonsType:size=16}${color9}${time %H}${color6}:${color4}${time %M}${color6}:${color3}${time %S}
+${goto 100}${font ROG LyonsType:size=16}${color9}${time %H}${color6}:${color4}${time %M}${color6}:${color3}${time %S}
 # ---   --- #
 # --- System Info --- #
 # ---   --- #
