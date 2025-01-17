@@ -24,7 +24,7 @@ own_window_transparent = false,
 own_window_argb_visual = true,
 own_window_argb_value = 0,
 own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
-alignment = 'bl',
+alignment = 'tl',
 gap_x = 3,
 gap_y = 0,
 minimum_height = 450,
@@ -41,7 +41,7 @@ default_color = '#FFFFFF',
 
 -- Display Option --
 -- Change this option from 0 to 1, 2 or vice versa to set on which monitor --
-xinerama_head = 2,
+xinerama_head = 1,
 
 -- change colors as needed --
 color1 = '#FF2692',       -- hr 2 line color, pink
@@ -56,7 +56,7 @@ color9 = '#FF2692',	  -- another pink for text
 }
 
 conky.text = [[
-${image ~/conky/ROGStrix/ROG_logo1.png -p 15,525 -s 205x100}
+${image ~/.conky/ROGStrix/ROG_logo1.png -p 15,555 -s 205x100}
 # -- Date & Time -- #
 #${goto 0}${voffset 0}${color8}${font ROG LyonsType:bold:size=20}R ${font ROG LyonsType:bold:size=10}${color4}D${font ROG LyonsType:size=8}ate${font ROG LyonsType:bold:size=10}/T${font}ime${font}${color1}${hr 2}${color9}
 ${goto 0}${voffset 0}${color8}${font ROG LyonsType:bold:size=20}R ${font ROG LyonsType:bold:size=10}${voffset 0}${color4}${font ROG LyonsType:bold:size=10}D${font ROG LyonsType:bold:size=8}ATE${font ROG LyonsType:bold:size=10} & T${font ROG LyonsType:bold:size=8}IME ${color1}${hr 2}${color9}
